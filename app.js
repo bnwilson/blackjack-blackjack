@@ -1,6 +1,7 @@
-const dealerLogic = require('blackjack-dealer-logic');
+const cardGame = { default { singleDeckGame }
+} = require("blackjack-dealer-logic")
 
-var alertButton = document.getElementById('alert');
-alertButton.onclick = function() {
-    alert('Here is our alert box')
+
+const getName = () => {
+    const name = InputEvent("What's your name? ")
 }
