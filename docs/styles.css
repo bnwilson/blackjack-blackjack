@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand|Bree+Serif|Josefin+Sans|Anton|Libre+Baskerville|Poppins|Lato|Raleway|Modak|Roboto+Condensed|Lora|Noto+Sans+TC|Open+Sans&display=swap');
+
+/* Reset Default Styling */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* Import Fonts */
+/* 
+font-family: 'Lora', serif;
+font-family: 'Noto Sans TC', sans-serif;
+font-family: 'Open Sans', sans-serif; 
+*/
+
+body{
+  background-image: linear-gradient(to bottom, rgb(253, 254, 255));
+  background-color: rgba(70, 75, 99, 0.836);
+}
+
+/* Default 1ine-height to 20pixels  */
+html {
+  --dark: #011;
+  --green: green;
+  --light: #efefef;
+  --red: red;
+
+  color: var(--dark);
+  font: 20px/1 sans-serif;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 30rem;
+  width: 90%;
+}
+  
+.playing-card {
+  background-color: var(--light);
+  border-radius: 0.5rem;
+  display: flex;
+  height: 8rem;
+  margin: 0.5rem;
+  padding: 1rem;
+  width: 6rem;
+  border-color: red; 
+}
+  
+.table {
+    align-items: center;
+    background-color: var(--green);
+    display: flex;
+    justify-content: center;
+    height: 20rem;
+}
+  
+.value-container {
+  align-items: center;
+  border: 1px solid var(--red);
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  width: 100%;
+}
