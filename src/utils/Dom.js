@@ -35,12 +35,27 @@ module.exports = {
     },
 
     addCardToTable (playingCard, sectionClass) {
-        const table = document.querySelector(".game__table");
-        table.append(playingCard);
+        const table = document.querySelector(HAND_CLASS[sectionClass]);
+        table.append(playingCard)
     },
 
-    dealCards (dealtHands) {
+    newDeal (dealtHands) {
+        document.querySelectorAll(`${HAND_CLASS.player}, ${HAND_CLASS.dealer}`).innerHTML = "";
         dealtHands.userCards.forEach(card => {
+            let newCard = this.generateCard(card);
+            this.addCardToTable(newCard, "player");
+        });
+        dealtHands.dealerCards.forEach(card => {
+            let newCard = this.generateCard(card);
+            this.addCardToTable(newCard, "dealer");
+        });
+    },
+
+    userHit (updatedHand) {
+        console.log(updatedHand)
+        let playerClass = HAND_CLASS.player;
+        document.querySelector(playerClass).innerHTML ="";
+        updatedHand.forEach(card => {
             let newCard = this.generateCard(card);
             this.addCardToTable(newCard, "player");
         });

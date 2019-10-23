@@ -49,18 +49,25 @@ html {
   margin: 1rem 0;
 }
 
-
 .game__table {
-  align-items: center;
   background-color: var(--green);
-  display: flex;
-  justify-content: center;
   height: 20rem;
 }
 
+.game__table__dealer-hand {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+}
+
 .game__table__user-hand {
-  align-content: center;
-  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: flex-end;
+  margin-top: 1rem 0;
+  padding: 2rem 0
+
 }
 
 .header-title {
@@ -85,13 +92,13 @@ html {
 }
 
 .playing-card-red {
-  border-color: red;
-  color: red;
+  border-color: var(--red);
+  color: var(--red);
 }
   
 .value-container {
   align-items: center;
-  border: 1px solid var(--red);
+  border: 1px solid;
   display: flex;
   justify-content: center;
   padding: 1rem;
