@@ -3,7 +3,7 @@
 /* Reset Default Styling */
 * {
   box-sizing: border-box;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
 }
 /* Import Fonts */
@@ -34,7 +34,41 @@ html {
   max-width: 30rem;
   width: 90%;
 }
-  
+
+.game__button {
+  border-radius: .3rem .3rem;
+  width: 3rem;
+  min-width: 3rem;
+}
+
+.game__button-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-content: space-around;
+  justify-self: center;
+  margin: 1rem 0;
+}
+
+
+.game__table {
+  align-items: center;
+  background-color: var(--green);
+  display: flex;
+  justify-content: center;
+  height: 20rem;
+}
+
+.game__table__user-hand {
+  align-content: center;
+  justify-content: center;
+}
+
+.header-title {
+  text-align: center;
+  color: var(--light);
+  margin: .5rem 1rem;
+}
+
 .playing-card {
   background-color: var(--light);
   border-radius: 0.5rem;
@@ -43,15 +77,16 @@ html {
   margin: 0.5rem;
   padding: 1rem;
   width: 6rem;
-  border-color: red; 
 }
-  
-.table {
-    align-items: center;
-    background-color: var(--green);
-    display: flex;
-    justify-content: center;
-    height: 20rem;
+
+.playing-card-black {
+  border-color: black;
+  color: black;
+}
+
+.playing-card-red {
+  border-color: red;
+  color: red;
 }
   
 .value-container {
