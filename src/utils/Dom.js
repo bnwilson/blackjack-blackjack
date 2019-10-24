@@ -1,3 +1,4 @@
+// Global Variables
 const HAND_CLASS = {
     "dealer": ".game__table__dealer-hand",
     "player": ".game__table__user-hand"
@@ -9,6 +10,11 @@ const SUIT_CLASS = { '♤': "playing-card-black",
 }
 
 module.exports = {
+    addEventToButton (id, callback) {
+        const button = document.querySelector(id);
+        button.addEventListener("click", callback);
+    },
+
     generateCard (card) {
         const playingCard = document.createElement("section");
         playingCard.classList.add("playing-card");
@@ -41,18 +47,15 @@ module.exports = {
 
     newDeal (dealtHands) {
         document.querySelectorAll(`${HAND_CLASS.player}, ${HAND_CLASS.dealer}`).innerHTML = "";
-        dealtHands.userCards.forEach(card => {
-            let newCard = this.generateCard(card);
-            this.addCardToTable(newCard, "player");
-        });
-        dealtHands.dealerCards.forEach(card => {
-            let newCard = this.generateCard(card);
-            this.addCardToTable(newCard, "dealer");
+        dealtHands.forEach(deal => {
+            deal.hand.forEach(card => {
+                let newCard = this.generateCard(card);
+                this.addCardToTable(newCard, deal.holder)
+            });
         });
     },
 
     userHit (updatedHand) {
-        console.log(updatedHand)
         let playerClass = HAND_CLASS.player;
         document.querySelector(playerClass).innerHTML ="";
         updatedHand.forEach(card => {

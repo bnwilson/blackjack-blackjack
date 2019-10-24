@@ -14,9 +14,9 @@ font-family: 'Open Sans', sans-serif;
 */
 
 body{
-  background-image: linear-gradient(to bottom, rgb(253, 254, 255));
-  background-color: rgba(70, 75, 99, 0.836);
-}
+  /* background-color: rgba(70, 75, 99, 0.836); */
+  background-image: url(https://warnerwave.xyz/image/41911-full_raining-money-png-hd-transparent-raining-money-hd-png-images-pluspng.jpg);
+ }
 
 /* Default 1ine-height to 20pixels  */
 html {
@@ -31,19 +31,23 @@ html {
 
 .container {
   margin: 0 auto;
-  max-width: 30rem;
+  max-width: 40rem;
   width: 90%;
+  border-radius: 15px;
+  background-color:black;
 }
 
 .game__button {
   border-radius: .3rem .3rem;
   width: 3rem;
   min-width: 3rem;
+  border: solid red 2px;
 }
 
 .game__button-wrapper {
   display: flex;
   flex-direction: row;
+  padding-bottom: 15px;
   align-content: space-around;
   justify-self: center;
   margin: 1rem 0;
@@ -51,13 +55,23 @@ html {
 
 .game__table {
   background-color: var(--green);
-  height: 20rem;
+  min-height: 20rem;
 }
 
+/* Table Labels */
 .game__table__dealer-hand {
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-start;
+  margin-top: 1rem 0;
+  padding: 2rem 0;
+}
+
+.game__table__message {
+  text-align: center;
+  min-height: 5rem;
+  margin: 2rem 0;
+  padding: 2rem 0;
 }
 
 .game__table__user-hand {
@@ -70,10 +84,19 @@ html {
 
 }
 
+.header {
+  display: flex;
+  justify-content: center;
+}
+
 .header-title {
-  text-align: center;
+  /* text-align: center; */
+  flex-basis: 9rem;
+  border: dotted white 2px;
   color: var(--light);
   margin: .5rem 1rem;
+  color: red;
+  padding: 5px;
 }
 
 .playing-card {

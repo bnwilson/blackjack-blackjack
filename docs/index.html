@@ -9,18 +9,19 @@
   </head>
   <body>
     <div class="container">
-      <header>
+      <header class="header">
         <h1 class="header-title">Blackjack</h1>
       </header>
       <main>
         <section class="game__table">
           <section class="game__table__dealer-hand"></section>
+          <section class="game__table__message"></section>
           <section class="game__table__user-hand"></section>
         </section>
         <section class="game__button-wrapper">
           <button id="deal" type="button" class="game__button game__button-deal" >Deal</button>
           <button id="hit" type="button" class="game__button game__button-hit">Hit</button>
-          <button type="button" class="game__button game__button-hold">Hold</button>
+          <button id="hold" type="button" class="game__button game__button-hold">Hold</button>
         </section>
       </main>
     </div>
