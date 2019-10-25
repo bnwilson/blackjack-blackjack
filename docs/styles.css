@@ -21,9 +21,10 @@ body{
 /* Default 1ine-height to 20pixels  */
 html {
   --dark: #011;
-  --green: green;
+  --green: rgb(58, 168, 58);
   --light: #efefef;
   --red: red;
+  --brown: rgb(88, 58, 33);
 
   color: var(--dark);
   font: 20px/1 sans-serif;
@@ -55,6 +56,7 @@ html {
 
 .game__table {
   background-color: var(--green);
+  border: 2rem solid var(--brown);
   min-height: 20rem;
 }
 
@@ -92,7 +94,6 @@ html {
 .header-title {
   /* text-align: center; */
   flex-basis: 9rem;
-  border: dotted white 2px;
   color: var(--light);
   margin: .5rem 1rem;
   color: red;
@@ -126,4 +127,12 @@ html {
   justify-content: center;
   padding: 1rem;
   width: 100%;
+}
+
+.chips{
+display: grid;
+grid-row: left right;
+}
+.five{
+  size: 15px;
 }

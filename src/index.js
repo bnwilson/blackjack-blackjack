@@ -7,22 +7,38 @@ function createGameButtons() {
   Dom.addGameButtons();
 }
 
+function playerHitAndEvalCallback () {
+  if (singleDeckGame.isUserPlaying()) {
+    singleDeckGame.hitUser();
+    Dom.userHit(singleDeckGame.getUserHand());
+    (didUserBust(singleDeckGame)) ? removeHitDoubleStandEvents(singleDeckGame) : Dom.updateTableMesage("Dealer:  Whew, that was intense!");
+  } else {
+    Dom.updateTableMesage("Dealer:  You can't hit again, you dolt!")
+  }
+}
+
 function addPlayerHitEvent(game) {
-  Dom.addEventToButton("#hit", () => {
-    Dom.userHit(game.getUserHand());
-  })
+  Dom.addEventToButton("#hit", playerHitAndEvalCallback)
 }
 
-function addPlayerDoubleEvent(game, bet) {
-  Dom.addEventToButton("#double", () => {
-    (game.isUserPlaying) ? Dom.playerDoubleBet(bet) : Dom.updateTableMesage("Double?? It's not your turn!")
-  })
+function playerDoubleEventCallback() {
+  (singleDeckGame.isUserPlaying()) ? 
+    Dom.userDoubleBet(singleDeckGame.getAnte()) : 
+    Dom.updateTableMesage("Double?? It's not your turn!");
 }
 
-function addPlayerStandEvent(game) {
-  Dom.addEventToButton("#stand", () => {
-    (game.isUserPlaying) ? Dom.playerStand() : Dom.updateTableMesage("Stand?? Hold your horses, your turn is over!")
-  })
+function addPlayerDoubleEvent() {
+  Dom.addEventToButton("#double", playerDoubleEventCallback)
+}
+
+function playerStandEventCallback() {
+  (singleDeckGame.isUserPlaying) ? 
+    Dom.userStand() : 
+    Dom.updateTableMesage("Stand?? Hold your horses, your turn is over!")
+}
+
+function addPlayerStandEvent() {
+  Dom.addEventToButton("#stand", playerStandEventCallback);
 }
 
 function addGameStartEvent() {
@@ -34,6 +50,16 @@ function removeGameStartEvent() {
   Dom.addEventToButton("#deal", () => {
     Dom.updateTableMesage("You were already dealt the cards!");
   })
+}
+
+function removeHitDoubleStandEvents(game, bet) {
+  Dom.removeEventFromButton("#hit", playerHitAndEvalCallback);
+  Dom.removeEventFromButton("#double", playerDoubleEventCallback);
+  Dom.removeEventFromButton("#stand", playerStandEventCallback);
+
+  Dom.addEventToButton("#hit", () => { Dom.updateTableMesage("Dealer:  Game Over, man.. let it go")})
+  Dom.addEventToButton("#double", () => { Dom.updateTableMesage("Double what?? You are done") })
+  Dom.addEventToButton("#stand", () => { Dom.updateTableMesage("Dealer:  Stand, sit, do whatever -- but the game is Over")})
 }
 
 function buildHandsArray (game) {
@@ -57,21 +83,29 @@ function getBet (game) {
     return bet;
 }
 
+function didUserBust (game) {
+  game.evaluateUser()
+  console.log("Is user playing?  >>  " + game.isUserPlaying())
+  let isBust = (game.isUserBust()) ? true : false;
+  console.log("Busted?  >> " + isBust)
+  return isBust;
+
+}
 
 function initializeGame () {
   singleDeckGame.deal();
   let bet = getBet(singleDeckGame);
+  singleDeckGame.receiveAnte(bet);
   let dealtHands = buildHandsArray(singleDeckGame);
   createGameButtons();
   removeGameStartEvent();
   addPlayerHitEvent(singleDeckGame);
   addPlayerDoubleEvent(singleDeckGame);
   addPlayerStandEvent(singleDeckGame);
+  console.log(singleDeckGame.evaluateUser());
 
 
   Dom.newDeal(dealtHands);
-
- 
 };
 
 const userHit = () => {

@@ -1,28 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
-    <div class="container">
-      <header class="header">
-        <h1 class="header-title">Blackjack</h1>
-      </header>
-      <main>
-        <section class="game__table">
-          <section class="game__table__dealer-hand"></section>
-          <section class="game__table__message"></section>
-          <section class="game__table__user-hand"></section>
-        </section>
-        <section class="game__button-wrapper">
-          <button id="deal" class="game__button game__button-deal" >Deal</button>
-        </section>
-      </main>
-    </div>
-    <script src="main.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <div class="container">
+    <header class="header">
+      <h1 class="header-title">Blackjack</h1>
+    </header>
+    <main>
+      <section class="game__table">
+        <section class="game__table__dealer-hand"></section>
+        <section class="game__table__message"></section>
+        <section class="game__table__user-hand"></section>
+      </section>
+      <section class="game__button-wrapper">
+        <button id="deal" class="game__button game__button-deal">Deal</button>
+      </section>
+
+      <div class="chips">
+        <div id="five">
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1151732/chip-5.png" alt="Poker Chip 5 value">
+        </div>
+        <div id="ten">
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1151732/chip-7.png" alt="Poker Chip 10 Value">
+        </div>
+        <div id="fifty">
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1151732/chip-3.png" alt="Poker Chip 50 Value">
+        </div>
+    </main>
+  </div>
+  <script src="main.js"></script>
+</body>
+
 </html>

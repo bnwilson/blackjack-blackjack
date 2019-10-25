@@ -89,6 +89,14 @@ module.exports = {
         });
     },
 
+    userDoubleBet (bet) {
+        console.log(bet * 2);
+    },
+
+    userStand() {
+        console.log(" Standing ");
+    },
+
     removeEventFromButton(id, callback) {
         let button = document.querySelector(id);
         button.removeEventListener("click", callback);
