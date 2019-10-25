@@ -42,6 +42,15 @@ module.exports = {
         buttons.forEach(button => { buttonContainer.append(button) });
     },
 
+    dealerHit (updatedHand) {
+        let dealerClass = HAND_CLASSES.dealer;
+        document.querySelector(dealerClass).innerHTML = "";
+        updatedHand.getCards().forEach(card => {
+            let newCard = this.generateCard(card);
+            this.addCardToTable(newCard, "dealer");
+        });
+    },
+
     generateCard (card) {
         const playingCard = document.createElement("section");
         playingCard.classList.add("playing-card");
@@ -102,6 +111,21 @@ module.exports = {
         button.removeEventListener("click", callback);
     },
 
+    updateTableMesage (messageStr) {
+        let tableMsgBox = document.querySelector(".game__table__message");
+        tableMsgBox.innerHTML = messageStr;
+    },
+
+    updateChipCount (ChipCountStr){
+        let chipCount = document.querySelector(".chip-count")
+        chipCount.innerHTML = ChipCountStr; 
+    },
+
+    updateUserBet (userBetStr){
+        let userChips = document.querySelector(".user-chips")
+        userChips.innerHTML = userBetStr 
+    },
+
     userHit (updatedHand) {
         let playerClass = HAND_CLASSES.player;
         document.querySelector(playerClass).innerHTML = "";
@@ -109,10 +133,7 @@ module.exports = {
             let newCard = this.generateCard(card);
             this.addCardToTable(newCard, "player");
         });
-    },
-
-    updateTableMesage (messageStr) {
-        let tableMsgBox = document.querySelector(".game__table__message");
-        tableMsgBox.innerHTML = messageStr;
     }
 }
+
+ 

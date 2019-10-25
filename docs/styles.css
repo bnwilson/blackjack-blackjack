@@ -129,10 +129,28 @@ html {
   width: 100%;
 }
 
-.chips{
+/* .chips{
+display: ;
+
+} */
+
+.header-title__chip-count{
 display: grid;
-grid-row: left right;
+Color:rgb(58, 168, 58) ;
 }
-.five{
-  size: 15px;
+
+.header-title__bet{
+  display: grid;
+  color:rgb(58, 168, 58);
+}
+
+.user-chips{
+  display: grid;
+  color: rgb(51, 51, 251);
+}
+
+.chip-count{
+  display:grid;
+  color:rgb(51, 51, 251);
+  
 }
