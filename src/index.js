@@ -6,11 +6,11 @@ import Dom from './utils/Dom';
 /************  Game Button Event Listeners  ************/
 // Player Double Event
 function playerDoubleEventCallback() {
-  (singleDeckGame.isUserPlaying()) ?
-    (singleDeckGame.isUserBust()) ?
-      endUserTurn() : 
-    userDouble() : 
+  if (singleDeckGame.isUserPlaying() && !singleDeckGame.isUserBust()) {
+    userDouble()  
+  } else {
     Dom.updateTableMesage("Double?? It's not your turn!");
+  }
 }
 
 function addPlayerDoubleEvent() {
@@ -125,20 +125,20 @@ function createGameButtons() {
 }
 
 function endGameEval() {
-  const resultNum = settleDealer();
-  const outcomeMsgArr = ["Sorry, you lose!", "Draw! You get your money back..", "Damn, you win... play again?"]
-  Dom.updateTableMesage(outcomeMsgArr[resultNum]);
-  switch (resultNum) {
+  switch (settleDealer()) {
     // User Lose
     case 0:
+      Dom.updateTableMesage("Sorry, you lose!")
       singleDeckGame.resetAnte();
       break;
     // User Push
     case 1:
+      Dom.updateTableMesage("Draw! You get your money back..")
       singleDeckGame.pushHand();
       break;
     // User WIN
     case 2:
+      Dom.updateTableMesage("Damn, you win... play again?")
       singleDeckGame.userWin();
       break;
     // Default
@@ -146,48 +146,58 @@ function endGameEval() {
       singleDeckGame.resetAnte();
       break;
   }
-  
-  Dom.updateChipCount(singleDeckGame.getUserChips());
 }
 
 function endUserTurn() {
   singleDeckGame.standUser();
   // removeHitDoubleStandEvents();
   endGameEval();
-
 }
 
-function evalHand(game) {
-  const isBusted = game.isUserBust();
-  return isBusted
-}
-
-function getBet () {
-  let balance = singleDeckGame.getUserChips();
-  let promptMsg = `Enter your bet   \n\nYou're current balance is:  ${singleDeckGame.getUserChips()}`
-  let bet = Number(prompt(promptMsg));
-  while (bet > balance || bet <= 0) {
-      promptMsg = (bet === 0) ? 
-          `You can't not bet you fool! Enter a real one   \n\nYou're current balance is:  ${balance}` :
-          `Give a serious bet, please. No funny business   \n\nYou're current balance is:  ${balance}`
-      
-      bet = Number(prompt(promptMsg));
+function evalHand() {
+  console.log(singleDeckGame);
+  if (singleDeckGame.isUserBust()) {
+    Dom.updateTableMesage("Dealer:  Wow, why would you hit again??? You busted!");
+    endUserTurn();
+  } else {
+    Dom.updateTableMesage("Dang, that was a close one. Scary stuff... Hit again?")
   }
-  return bet;
 }
 
-function initializeGame () {
+function getAnteFromUser (game) {
+  const ante = new Promise((resolve, reject) => {
+    let balance = game.getUserChips();
+    let promptMsg = `Enter your bet   \n\nYou're current balance is:  ${singleDeckGame.getUserChips()}`
+    let bet = Number(prompt(promptMsg));
+    while (bet > balance || bet <= 0) {
+        promptMsg = (bet === 0) ? 
+            `You can't not bet you fool! Enter a real one   \n\nYou're current balance is:  ${balance}` :
+            `Give a serious bet, please. No funny business   \n\nYou're current balance is:  ${balance}`
+        
+        bet = Number(prompt(promptMsg));
+    }
+    resolve(bet);
+  })
+  return ante;
+}
+
+async function initializeGame () {
   singleDeckGame.deal();
-  const bet = getBet(singleDeckGame);
-  singleDeckGame.receiveAnte(bet);
-  const dealtHands = buildHandsArray(singleDeckGame);
-  createGameButtons();
-  removeGameStartEvent();
-  addNewGameEvent();
-  addHitDoubleStandEvents();
-  Dom.newDeal(dealtHands);
-  Dom.updateChipCount(singleDeckGame.getUserChips());
-  Dom.updateUserBet(bet);
+  getAnteFromUser(singleDeckGame)
+  .then(bet => {
+    singleDeckGame.receiveAnte(bet);
+    const dealtHands = buildHandsArray(singleDeckGame);
+    createGameButtons();
+    removeGameStartEvent();
+    addNewGameEvent();
+    addHitDoubleStandEvents();
+    Dom.newDeal(dealtHands);
+    Dom.updateChipCount(singleDeckGame.getUserChips());
+    Dom.updateUserBet(bet);
+  })
+  .catch(err => {
+    console.error(err)
+  })
 };
 
 function settleDealer () {
@@ -196,30 +206,46 @@ function settleDealer () {
   return singleDeckGame.outcome();
 }
 
-function startNextGame () {
-  singleDeckGame.resetPlayers();
-  const bet = getBet();
-  singleDeckGame.deal();
-  const dealtHands = buildHandsArray(singleDeckGame);
-  Dom.newDeal(dealtHands);
-  Dom.updateUserBet(bet);
+async function startNextGame () {
+  if (singleDeckGame.getUserChips > 0) {
+    getAnteFromUser(singleDeckGame)
+    .then(bet => {
+      Dom.clearBoard();
+      singleDeckGame.receiveAnte(bet);
+      singleDeckGame.resetPlayers();
+      singleDeckGame.deal();
+      Dom.newDeal(buildHandsArray(singleDeckGame));
+      Dom.updateUserBet(bet);
+      Dom.updateChipCount(singleDeckGame.getUserChips());
+    })
+    .catch(err => {
+      console.error(err)
+    })
+  } else {
+    removeHitDoubleStandEvents();
+    removeGameStartEvent();
+    Dom.updateTableMesage("Dealer:  Sorry, you're out of chips! Come back with your next paycheck or.. you know.. refresh the page");
+  }
+  
 }
 
 function userDouble () {
-  console.log(singleDeckGame);
-  singleDeckGame.doubleUser();
-  Dom.userHit(singleDeckGame.getUserHand());
-  Dom.updateUserBet(singleDeckGame.getAnte());
-  Dom.updateChipCount(singleDeckGame.getUserChips())
-  endUserTurn();
+  if (singleDeckGame.getUserChips() >= singleDeckGame.getAnte()) {
+    singleDeckGame.doubleUser();
+    Dom.userHit(singleDeckGame.getUserHand());
+    Dom.updateUserBet(singleDeckGame.getAnte());
+    Dom.updateChipCount(singleDeckGame.getUserChips())
+    endUserTurn();
+  } else {
+    Dom.updateTableMesage("Dealer:  You can't double money you don't have!")
+  }
 }
 
 function userHit () {
   singleDeckGame.hitUser();
   Dom.userHit(singleDeckGame.getUserHand());
-  (evalHand(singleDeckGame)) ? 
-    endUserTurn() : 
-    Dom.updateTableMesage("Dealer:  Whew, that was intense!");
+  singleDeckGame.evaluateUser();
+  evalHand();
 }
 
 

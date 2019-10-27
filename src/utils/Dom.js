@@ -42,6 +42,13 @@ module.exports = {
         buttons.forEach(button => { buttonContainer.append(button) });
     },
 
+    clearBoard () {
+        this.updateTableMesage("");
+        document.querySelector(HAND_CLASSES.dealer).innerHTML = "";
+        document.querySelector(HAND_CLASSES.player).innerHTML = "";
+
+    },
+
     dealerHit (updatedHand) {
         let dealerClass = HAND_CLASSES.dealer;
         document.querySelector(dealerClass).innerHTML = "";
