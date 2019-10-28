@@ -10,9 +10,16 @@ const SUIT_CLASS = { '♤': "playing-card-black",
 }
 
 module.exports = {
-    addCardToTable (playingCard, sectionClass) {
+    addCardToTable (playingCard, sectionClass, newHand = false) {
         const table = document.querySelector(HAND_CLASSES[sectionClass]);
-        table.append(playingCard)
+        if (newHand && sectionClass === "dealer") {
+            const cardBack = this.generateCardBack();
+
+            table.append(cardBack);
+            table.append(playingCard)
+        } else {
+            table.append(playingCard)
+        }
     },
 
     addEventToButton (id, callback) {
@@ -82,6 +89,13 @@ module.exports = {
         return playingCard;
     },
 
+    generateCardBack () {
+        const playingCardBack = document.createElement("section");
+        playingCardBack.classList.add("playing-card");
+        playingCardBack.classList.add("playing-card-down")
+        return playingCardBack
+    },
+
     getBetFromUser (game) {
         let balance = game.getUserChips();
         let promptMsg = `Enter your bet   \n\nYou're current balance is:  ${balance}`
@@ -100,7 +114,7 @@ module.exports = {
         dealtHands.forEach(deal => {
             deal.hand.forEach(card => {
                 let newCard = this.generateCard(card);
-                this.addCardToTable(newCard, deal.holder)
+                this.addCardToTable(newCard, deal.holder, true)
             });
         });
     },

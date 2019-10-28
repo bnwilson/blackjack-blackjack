@@ -117,7 +117,7 @@ function buildHandsArray (game) {
   const userHand = game.getUserHand();
   const dealerHand = game.getDealerHand();
   return [ { hand: userHand.getCards(), holder: "player"},
-           { hand: dealerHand.getCards(), holder: "dealer" } ]
+           { hand: [dealerHand.getCards()[1]], holder: "dealer" } ]
 }
 
 function createGameButtons() {
@@ -207,7 +207,7 @@ function settleDealer () {
 }
 
 async function startNextGame () {
-  if (singleDeckGame.getUserChips > 0) {
+  if (singleDeckGame.getUserChips() > 0) {
     getAnteFromUser(singleDeckGame)
     .then(bet => {
       Dom.clearBoard();

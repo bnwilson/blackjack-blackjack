@@ -22,7 +22,7 @@ body{
 html {
   --dark: #011;
   --green: rgb(58, 168, 58);
-  --light: #efefef;
+  --light: #aee7f5;
   --red: red;
   --brown: rgb(88, 58, 33);
 
@@ -104,10 +104,10 @@ html {
   background-color: var(--light);
   border-radius: 0.5rem;
   display: flex;
-  height: 8rem;
+  height: 9rem;
   margin: 0.5rem;
   padding: 1rem;
-  width: 6rem;
+  width: 6.5rem;
 }
 
 .playing-card-black {
@@ -118,6 +118,11 @@ html {
 .playing-card-red {
   border-color: var(--red);
   color: var(--red);
+}
+
+.playing-card-down {
+  border-color: black;
+  background-image: url("images/card-background.jpg");
 }
   
 .value-container {
