@@ -21,9 +21,10 @@ body{
 /* Default 1ine-height to 20pixels  */
 html {
   --dark: #011;
-  --green: green;
-  --light: #efefef;
+  --green: rgb(58, 168, 58);
+  --light: #aee7f5;
   --red: red;
+  --brown: rgb(88, 58, 33);
 
   color: var(--dark);
   font: 20px/1 sans-serif;
@@ -55,6 +56,7 @@ html {
 
 .game__table {
   background-color: var(--green);
+  border: 2rem solid var(--brown);
   min-height: 20rem;
 }
 
@@ -92,7 +94,6 @@ html {
 .header-title {
   /* text-align: center; */
   flex-basis: 9rem;
-  border: dotted white 2px;
   color: var(--light);
   margin: .5rem 1rem;
   color: red;
@@ -103,10 +104,10 @@ html {
   background-color: var(--light);
   border-radius: 0.5rem;
   display: flex;
-  height: 8rem;
+  height: 9rem;
   margin: 0.5rem;
   padding: 1rem;
-  width: 6rem;
+  width: 6.5rem;
 }
 
 .playing-card-black {
@@ -118,6 +119,11 @@ html {
   border-color: var(--red);
   color: var(--red);
 }
+
+.playing-card-down {
+  border-color: black;
+  background-image: url("images/card-background.jpg");
+}
   
 .value-container {
   align-items: center;
@@ -126,4 +132,30 @@ html {
   justify-content: center;
   padding: 1rem;
   width: 100%;
+}
+
+/* .chips{
+display: ;
+
+} */
+
+.header-title__chip-count{
+display: grid;
+Color:rgb(58, 168, 58) ;
+}
+
+.header-title__bet{
+  display: grid;
+  color:rgb(58, 168, 58);
+}
+
+.user-chips{
+  display: grid;
+  color: rgb(51, 51, 251);
+}
+
+.chip-count{
+  display:grid;
+  color:rgb(51, 51, 251);
+  
 }

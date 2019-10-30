@@ -10,9 +10,16 @@ const SUIT_CLASS = { '♤': "playing-card-black",
 }
 
 module.exports = {
-    addCardToTable (playingCard, sectionClass) {
+    addCardToTable (playingCard, sectionClass, newHand = false) {
         const table = document.querySelector(HAND_CLASSES[sectionClass]);
-        table.append(playingCard)
+        if (newHand && sectionClass === "dealer") {
+            const cardBack = this.generateCardBack();
+
+            table.append(cardBack);
+            table.append(playingCard)
+        } else {
+            table.append(playingCard)
+        }
     },
 
     addEventToButton (id, callback) {
@@ -42,6 +49,22 @@ module.exports = {
         buttons.forEach(button => { buttonContainer.append(button) });
     },
 
+    clearBoard () {
+        this.updateTableMesage("");
+        document.querySelector(HAND_CLASSES.dealer).innerHTML = "";
+        document.querySelector(HAND_CLASSES.player).innerHTML = "";
+
+    },
+
+    dealerHit (updatedHand) {
+        let dealerClass = HAND_CLASSES.dealer;
+        document.querySelector(dealerClass).innerHTML = "";
+        updatedHand.getCards().forEach(card => {
+            let newCard = this.generateCard(card);
+            this.addCardToTable(newCard, "dealer");
+        });
+    },
+
     generateCard (card) {
         const playingCard = document.createElement("section");
         playingCard.classList.add("playing-card");
@@ -66,6 +89,13 @@ module.exports = {
         return playingCard;
     },
 
+    generateCardBack () {
+        const playingCardBack = document.createElement("section");
+        playingCardBack.classList.add("playing-card");
+        playingCardBack.classList.add("playing-card-down")
+        return playingCardBack
+    },
+
     getBetFromUser (game) {
         let balance = game.getUserChips();
         let promptMsg = `Enter your bet   \n\nYou're current balance is:  ${balance}`
@@ -84,14 +114,37 @@ module.exports = {
         dealtHands.forEach(deal => {
             deal.hand.forEach(card => {
                 let newCard = this.generateCard(card);
-                this.addCardToTable(newCard, deal.holder)
+                this.addCardToTable(newCard, deal.holder, true)
             });
         });
+    },
+
+    userDoubleBet (bet) {
+        console.log(bet * 2);
+    },
+
+    userStand() {
+        console.log(" Standing ");
     },
 
     removeEventFromButton(id, callback) {
         let button = document.querySelector(id);
         button.removeEventListener("click", callback);
+    },
+
+    updateTableMesage (messageStr) {
+        let tableMsgBox = document.querySelector(".game__table__message");
+        tableMsgBox.innerHTML = messageStr;
+    },
+
+    updateChipCount (ChipCountStr){
+        let chipCount = document.querySelector(".chip-count")
+        chipCount.innerHTML = ChipCountStr; 
+    },
+
+    updateUserBet (userBetStr){
+        let userChips = document.querySelector(".user-chips")
+        userChips.innerHTML = userBetStr 
     },
 
     userHit (updatedHand) {
@@ -101,10 +154,7 @@ module.exports = {
             let newCard = this.generateCard(card);
             this.addCardToTable(newCard, "player");
         });
-    },
-
-    updateTableMesage (messageStr) {
-        let tableMsgBox = document.querySelector(".game__table__message");
-        tableMsgBox.innerHTML = messageStr;
     }
 }
+
+ 
