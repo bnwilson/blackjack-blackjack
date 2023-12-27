@@ -6,43 +6,52 @@
   margin: 0 auto;
   padding: 0;
 }
-/* Import Fonts */
-/* 
-font-family: 'Lora', serif;
-font-family: 'Noto Sans TC', sans-serif;
-font-family: 'Open Sans', sans-serif; 
-*/
 
 body{
-  /* background-color: rgba(70, 75, 99, 0.836); */
-  background-image: url(https://warnerwave.xyz/image/41911-full_raining-money-png-hd-transparent-raining-money-hd-png-images-pluspng.jpg);
- }
-
-/* Default 1ine-height to 20pixels  */
-html {
-  --dark: #011;
-  --green: rgb(58, 168, 58);
-  --light: #aee7f5;
-  --red: red;
-  --brown: rgb(88, 58, 33);
-
-  color: var(--dark);
-  font: 20px/1 sans-serif;
-}
-
-.container {
-  margin: 0 auto;
-  max-width: 40rem;
-  width: 90%;
-  border-radius: 15px;
-  background-color:black;
-}
-
-.game__button {
-  border-radius: .3rem .3rem;
-  width: 3rem;
-  min-width: 3rem;
-  border: solid red 2px;
+  /* * * * Import Fonts * * * *
+    font-family: 'Bree Serif', serif;
+    font-family: 'Josefin Sans', sans-serif;
+    font-family: Anton, sans-serif;
+    font-family: 'Libre Baskerville', sans-serif;
+    font-family: 'Lora', serif;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-family: 'Open Sans', sans-serif; 
+    * * * * * * * * * * * * * * */
+    /* background-color: rgba(70, 75, 99, 0.836); */
+    background-image: url("blackjack_background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Josefin Sans', sans-serif;
+  }
+  
+  /* Default 1ine-height to 20pixels  */
+  html {
+    --dark: #011;
+    --green: rgb(58, 168, 58);
+    --light: #aee7f5;
+    --red: red;
+    --brown: rgb(88, 58, 33);
+    
+    color: var(--dark);
+    font: 20px/1 sans-serif;
+  }
+  
+  .container {
+    margin: 0 auto;
+    max-width: 45rem;
+    width: 80%;
+    border-radius: 15px;
+    background-color:black;
+    box-shadow: 2px 2px 10px black;
+  }
+  
+  .game__button {
+    border-radius: .3rem .3rem;
+    font-family: 'Bree Serif', serif;
+    font-size: large;
+    width: 3rem;
+    min-width: 3rem;
+    border: 2px outset rgba(255, 71, 35, 0.679);
 }
 
 .game__button-wrapper {
@@ -55,8 +64,22 @@ html {
 }
 
 .game__table {
-  background-color: var(--green);
-  border: 2rem solid var(--brown);
+  /* background-color: var(--green); */
+  /* border: 1.5rem inset var(--brown); */
+  /* border: 1.5rem solid rgba(88, 58, 33, 0.958); */
+  background-image: repeating-linear-gradient(315deg, rgba(247, 28, 25, 0.865), rgba(217, 5, 5, 0.877) 3px, transparent -15px, transparent 2px);
+  background-size: 50px;
+  border-width: 1.25rem;
+  border-style: solid;
+  border-right-style: groove;
+  border-right-color: rgb(80, 14, 14);
+  border-left-style: ridge;
+  border-left-color: rgb(71, 8, 8);
+  border-top-style: groove;
+  border-top-color: rgba(90, 7, 7, 0.838);
+  border-bottom-style: ridge;
+  border-bottom-color: rgba(90, 7, 7, 0.838);
+  /* border-color: var(--brown); */
   min-height: 20rem;
 }
 
@@ -122,7 +145,7 @@ html {
 
 .playing-card-down {
   border-color: black;
-  background-image: url("images/card-background.jpg");
+  background-image: url("card-background.jpg");
 }
   
 .value-container {

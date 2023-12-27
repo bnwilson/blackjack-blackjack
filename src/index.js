@@ -91,6 +91,7 @@ function addNewGameEvent() {
 
 function newGameEventCallback() {
   console.log(singleDeckGame);
+  console.log(' * SHAME ON YOU *');
   (singleDeckGame.isUserPlaying()) ?
     Dom.updateTableMesage("You should probably finish your turn first...") :
     (singleDeckGame.isDealerPlaying()) ?
